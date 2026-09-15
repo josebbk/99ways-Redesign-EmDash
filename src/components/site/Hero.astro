@@ -1,0 +1,102 @@
+---
+import Button from "../ui/Button.astro";
+---
+
+<section class="hero">
+	<div class="container hero__inner">
+		<div class="hero__content">
+			<h1 class="hero__headline text-display">
+				Find and Pull Your Biggest Growth Levers with Experimentation
+			</h1>
+			<p class="hero__subhead">
+				We run your CRO operation, from research and prioritization to implementation and analysis.
+			</p>
+			<div class="hero__cta">
+				<Button href="#todo-booking-link">Book Intro Call</Button>
+			</div>
+		</div>
+
+		<div class="hero__visual">
+			<div class="hero__placeholder">
+				<span class="hero__placeholder-title text-label">Hero visual — placeholder</span>
+				<span class="hero__placeholder-note text-small">
+					Abstract brand-system visual (compact-mark pupil geometry) — pending design
+				</span>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		padding-block: var(--space-24) var(--space-24);
+	}
+
+	.hero__inner {
+		display: grid;
+		grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+		align-items: center;
+		gap: var(--space-12);
+	}
+
+	.hero__headline {
+		margin: 0;
+		color: var(--color-text);
+	}
+
+	.hero__subhead {
+		margin: var(--space-6) 0 0;
+		font-family: var(--font-sans);
+		font-weight: 400;
+		font-size: 1.125rem;
+		line-height: 1.6;
+		color: var(--color-text-muted);
+		max-width: 46ch;
+	}
+
+	.hero__cta {
+		margin-top: var(--space-8);
+	}
+
+	.hero__visual {
+		display: flex;
+		align-items: stretch;
+		justify-content: center;
+	}
+
+	.hero__placeholder {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: var(--space-3);
+		width: 100%;
+		min-height: 320px;
+		text-align: center;
+		padding: var(--space-6);
+		border: 1px dashed var(--color-border-strong);
+	}
+
+	.hero__placeholder-title {
+		color: var(--color-text);
+	}
+
+	.hero__placeholder-note {
+		color: var(--color-text-muted);
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			padding-block: var(--space-12) var(--space-12);
+		}
+
+		.hero__inner {
+			grid-template-columns: 1fr;
+			gap: var(--space-8);
+		}
+
+		.hero__placeholder {
+			min-height: 200px;
+		}
+	}
+</style>

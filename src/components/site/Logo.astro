@@ -1,0 +1,28 @@
+---
+interface Props {
+	variant?: "wordmark" | "compact";
+	class?: string;
+}
+
+const { variant = "wordmark", class: className } = Astro.props;
+const src =
+	variant === "wordmark"
+		? "/logo/wordmark/dark/99ways-wordmark-dark-background.svg"
+		: "/logo/compact/dark/99ways-compact-dark-background.svg";
+const width = variant === "wordmark" ? 180 : 64;
+---
+
+<img
+	class={className}
+	src={src}
+	alt="99Ways"
+	width={width}
+	loading="eager"
+	decoding="async"
+/>
+
+<style>
+	img {
+		height: auto;
+	}
+</style>

@@ -1,0 +1,114 @@
+/* 99ways — design tokens & type scale (dark theme) */
+
+:root {
+	/* §1 — Color */
+	--color-bg: #292b2a; /* Graphite — page background */
+	--color-text: #f4f3ef; /* Warm White — primary text */
+	--color-text-muted: #b5b8b1; /* Inverse Muted — secondary text, meta, captions */
+	--color-accent: #a6baff; /* Inverse Inquiry Blue — links, interactive, focus states */
+	--color-action: #6bd98d; /* Inverse Green — the ONE primary CTA color */
+	--color-border: rgba(181, 184, 177, 0.24); /* Inverse Muted @ low opacity — hairlines, card borders */
+	--color-border-strong: rgba(181, 184, 177, 0.4);
+
+	/* §2 — Typography */
+	--font-mono: "IBM Plex Mono", monospace;
+	--font-sans: "IBM Plex Sans", sans-serif;
+
+	/* §3 — Spacing */
+	--space-1: 4px;
+	--space-2: 8px;
+	--space-3: 12px;
+	--space-4: 16px;
+	--space-6: 24px;
+	--space-8: 32px;
+	--space-12: 48px;
+	--space-16: 64px;
+	--space-24: 96px;
+	--space-32: 128px;
+}
+
+/* ---------- Minimal reset ---------- */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--color-bg);
+	color: var(--color-text);
+	font-family: var(--font-sans);
+	font-size: 1rem;
+	line-height: 1.6;
+}
+
+img,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+/* ---------- Type scale (§2) ---------- */
+
+.text-display {
+	font-family: var(--font-mono);
+	font-weight: 600;
+	font-size: 3.5rem;
+	line-height: 1.1;
+}
+
+.text-h2 {
+	font-family: var(--font-mono);
+	font-weight: 600;
+	font-size: 2rem;
+	line-height: 1.2;
+}
+
+.text-h3 {
+	font-family: var(--font-mono);
+	font-weight: 600;
+	font-size: 1.25rem;
+	line-height: 1.3;
+}
+
+.text-body {
+	font-family: var(--font-sans);
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.6;
+}
+
+.text-label {
+	font-family: var(--font-mono);
+	font-weight: 500;
+	font-size: 0.875rem;
+	line-height: 1.4;
+	letter-spacing: 0.02em;
+}
+
+.text-small {
+	font-family: var(--font-sans);
+	font-weight: 400;
+	font-size: 0.8125rem;
+	line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+	.text-display {
+		font-size: 2.25rem;
+	}
+
+	.text-h2 {
+		font-size: 1.5rem;
+	}
+
+	.text-h3 {
+		font-size: 1.125rem;
+	}
+}

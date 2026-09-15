@@ -1,0 +1,432 @@
+---
+import Button from "../ui/Button.astro";
+import Logo from "./Logo.astro";
+---
+
+<header class="site-header">
+	<div class="container site-header__inner">
+		<a class="site-header__logo" href="/" aria-label="99Ways home">
+			<Logo variant="wordmark" class="site-header__logo-wordmark" />
+			<Logo variant="compact" class="site-header__logo-compact" />
+		</a>
+
+		<nav class="site-nav" aria-label="Primary">
+			<ul class="site-nav__list">
+				<li class="site-nav__item">
+					<button type="button" class="site-nav__trigger" aria-haspopup="true" aria-expanded="false">
+						Services
+						<svg class="site-nav__caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+					</button>
+					<ul class="site-nav__dropdown">
+						<li><a class="site-nav__link" href="/hire-cro-expert/">Conversion Rate Optimization</a></li>
+						<li><a class="site-nav__link" href="/hire-posthog-expert-guide/">PostHog &amp; Product Analytics</a></li>
+						<li><a class="site-nav__link" href="/hire-hyros-expert-guide/">Hyros &amp; Tracking Setup</a></li>
+					</ul>
+				</li>
+
+				<li class="site-nav__item">
+					<button type="button" class="site-nav__trigger" aria-haspopup="true" aria-expanded="false">
+						Resources
+						<svg class="site-nav__caret" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+					</button>
+					<ul class="site-nav__dropdown">
+						<li><a class="site-nav__link" href="/category/guides-how-to/">Guides and How-tos</a></li>
+						<li><a class="site-nav__link" href="/category/posthog-feature-breakdown/">PostHog Feature Breakdowns</a></li>
+						<li><a class="site-nav__link" href="/category/tools-comparison/">Tools Comparison</a></li>
+						<li class="site-nav__sub">
+							<a class="site-nav__link site-nav__link--sub" href="/category/optimization-experience/">
+								Optimization Experiences
+								<svg class="site-nav__caret site-nav__caret--sub" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6" /></svg>
+							</a>
+							<ul class="site-nav__dropdown site-nav__dropdown--sub">
+								<li><a class="site-nav__link" href="/category/optimization-experience/featured-experiments/">Featured Experiments</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+
+		<div class="site-header__cta">
+			<Button href="/contact-form/" variant="secondary">Contact Us</Button>
+		</div>
+
+		<button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-mobile-nav">
+			<span class="site-header__toggle-label">Menu</span>
+			<span class="site-header__toggle-icon" aria-hidden="true">
+				<span class="site-header__bar" />
+				<span class="site-header__bar" />
+				<span class="site-header__bar" />
+			</span>
+		</button>
+	</div>
+
+	<div class="mobile-nav" id="site-mobile-nav" hidden>
+		<nav class="mobile-nav__inner" aria-label="Mobile">
+			<ul class="mobile-nav__list">
+				<li>
+					<details class="mobile-nav__group">
+						<summary class="mobile-nav__summary">
+							Services
+							<svg class="mobile-nav__caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+						</summary>
+						<ul class="mobile-nav__sublist">
+							<li><a href="/hire-cro-expert/">Conversion Rate Optimization</a></li>
+							<li><a href="/hire-posthog-expert-guide/">PostHog &amp; Product Analytics</a></li>
+							<li><a href="/hire-hyros-expert-guide/">Hyros &amp; Tracking Setup</a></li>
+						</ul>
+					</details>
+				</li>
+
+				<li>
+					<details class="mobile-nav__group">
+						<summary class="mobile-nav__summary">
+							Resources
+							<svg class="mobile-nav__caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
+						</summary>
+						<ul class="mobile-nav__sublist">
+							<li><a href="/category/guides-how-to/">Guides and How-tos</a></li>
+							<li><a href="/category/posthog-feature-breakdown/">PostHog Feature Breakdowns</a></li>
+							<li><a href="/category/tools-comparison/">Tools Comparison</a></li>
+							<li>
+								<a href="/category/optimization-experience/">Optimization Experiences</a>
+								<ul class="mobile-nav__nested">
+									<li><a href="/category/optimization-experience/featured-experiments/">Featured Experiments</a></li>
+								</ul>
+							</li>
+						</ul>
+					</details>
+				</li>
+
+				<li class="mobile-nav__cta-item">
+					<a class="btn btn--secondary mobile-nav__cta" href="/contact-form/">Contact Us</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</header>
+
+<script>
+	const header = document.querySelector(".site-header");
+	const toggle = header?.querySelector(".site-header__toggle");
+	const mobileNav = document.getElementById("site-mobile-nav");
+
+	if (toggle && mobileNav) {
+		const setOpen = (open) => {
+			if (open) {
+				mobileNav.removeAttribute("hidden");
+			} else {
+				mobileNav.setAttribute("hidden", "");
+			}
+			toggle.setAttribute("aria-expanded", String(open));
+		};
+
+		toggle.addEventListener("click", () => {
+			setOpen(mobileNav.hasAttribute("hidden"));
+		});
+
+		mobileNav.addEventListener("click", (event) => {
+			if (event.target.closest("a")) {
+				setOpen(false);
+			}
+		});
+	}
+</script>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background: var(--color-bg);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.site-header__inner {
+		display: flex;
+		align-items: center;
+		gap: var(--space-8);
+		padding-block: var(--space-4);
+		min-height: 72px;
+	}
+
+	/* Logo */
+	.site-header__logo {
+		display: inline-flex;
+		align-items: center;
+		flex: none;
+		padding-block: var(--space-2);
+	}
+
+	.site-header__logo img {
+		display: block;
+	}
+
+	.site-header__logo-wordmark {
+		display: block;
+	}
+
+	.site-header__logo-compact {
+		display: none;
+	}
+
+	/* Desktop nav */
+	.site-nav {
+		margin-inline-start: auto;
+	}
+
+	.site-nav__list {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.site-nav__item {
+		position: relative;
+	}
+
+	.site-nav__trigger {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-1);
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.875rem;
+		line-height: 1.4;
+		letter-spacing: 0.02em;
+		color: var(--color-text);
+		background: transparent;
+		border: 0;
+		padding: var(--space-2) var(--space-3);
+		cursor: pointer;
+	}
+
+	.site-nav__trigger:hover {
+		color: var(--color-accent);
+	}
+
+	.site-nav__caret {
+		transition: transform 150ms ease;
+	}
+
+	.site-nav__item:hover .site-nav__trigger .site-nav__caret,
+	.site-nav__item:focus-within .site-nav__trigger .site-nav__caret {
+		transform: rotate(180deg);
+	}
+
+	.site-nav__dropdown {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		min-width: 240px;
+		list-style: none;
+		margin: 0;
+		padding: var(--space-2) 0;
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		display: none;
+	}
+
+	.site-nav__item:hover > .site-nav__dropdown,
+	.site-nav__item:focus-within > .site-nav__dropdown {
+		display: block;
+	}
+
+	.site-nav__link {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-3);
+		padding: var(--space-2) var(--space-4);
+		color: var(--color-text);
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.875rem;
+		line-height: 1.4;
+		letter-spacing: 0.02em;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.site-nav__link:hover,
+	.site-nav__link:active {
+		color: var(--color-accent);
+		text-decoration: none;
+	}
+
+	/* Nested submenu */
+	.site-nav__sub {
+		position: relative;
+	}
+
+	.site-nav__dropdown--sub {
+		top: 0;
+		left: 100%;
+	}
+
+	.site-nav__sub:hover > .site-nav__dropdown--sub,
+	.site-nav__sub:focus-within > .site-nav__dropdown--sub {
+		display: block;
+	}
+
+	.site-nav__caret--sub {
+		transform: rotate(-90deg);
+	}
+
+	/* CTA + toggle */
+	.site-header__cta {
+		flex: none;
+	}
+
+	.site-header__toggle {
+		display: none;
+		align-items: center;
+		gap: var(--space-2);
+		background: transparent;
+		border: 1px solid var(--color-border-strong);
+		color: var(--color-text);
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.875rem;
+		letter-spacing: 0.02em;
+		padding: var(--space-2) var(--space-3);
+		cursor: pointer;
+	}
+
+	.site-header__toggle-icon {
+		display: inline-flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.site-header__bar {
+		display: block;
+		width: 16px;
+		height: 1px;
+		background: currentColor;
+	}
+
+	/* Mobile nav */
+	.mobile-nav {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		background: var(--color-bg);
+		border-bottom: 1px solid var(--color-border);
+		max-height: calc(100vh - 72px);
+		overflow-y: auto;
+	}
+
+	.mobile-nav[hidden] {
+		display: none;
+	}
+
+	.mobile-nav__inner {
+		padding: var(--space-3) var(--space-6) var(--space-6);
+	}
+
+	.mobile-nav__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.mobile-nav__summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-family: var(--font-mono);
+		font-weight: 500;
+		font-size: 0.875rem;
+		letter-spacing: 0.02em;
+		padding: var(--space-3) 0;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.mobile-nav__summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.mobile-nav__caret {
+		transition: transform 150ms ease;
+	}
+
+	.mobile-nav__group[open] .mobile-nav__caret {
+		transform: rotate(180deg);
+	}
+
+	.mobile-nav__sublist {
+		list-style: none;
+		margin: 0 0 var(--space-2);
+		padding: 0 0 var(--space-2) var(--space-2);
+		border-left: 1px solid var(--color-border);
+	}
+
+	.mobile-nav__sublist a {
+		display: block;
+		padding: var(--space-2) 0;
+		color: var(--color-text);
+		font-family: var(--font-mono);
+		font-size: 0.875rem;
+		text-decoration: none;
+	}
+
+	.mobile-nav__sublist a:hover,
+	.mobile-nav__sublist a:active {
+		color: var(--color-accent);
+	}
+
+	.mobile-nav__nested {
+		list-style: none;
+		margin: 0;
+		padding: 0 0 0 var(--space-4);
+	}
+
+	.mobile-nav__nested a {
+		color: var(--color-text-muted);
+	}
+
+	.mobile-nav__cta-item {
+		padding-top: var(--space-3);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.mobile-nav__cta {
+		width: 100%;
+	}
+
+	/* Responsive: collapse below 768px */
+	@media (max-width: 768px) {
+		.site-header__logo-wordmark {
+			display: none;
+		}
+
+		.site-header__logo-compact {
+			display: block;
+		}
+
+		.site-nav {
+			display: none;
+		}
+
+		.site-header__cta {
+			display: none;
+		}
+
+		.site-header__toggle {
+			display: inline-flex;
+			margin-inline-start: auto;
+		}
+	}
+
+	@media (min-width: 769px) {
+		.mobile-nav {
+			display: none !important;
+		}
+	}
+</style>

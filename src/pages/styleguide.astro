@@ -1,0 +1,410 @@
+---
+import Font from "astro/components/Font.astro";
+import Button from "../components/ui/Button.astro";
+import Card from "../components/ui/Card.astro";
+import Divider from "../components/ui/Divider.astro";
+import "../styles/theme.css";
+import "../styles/components.css";
+
+const colors = [
+	{ token: "--color-bg", label: "Graphite", value: "#292B2A", role: "Page background" },
+	{ token: "--color-text", label: "Warm White", value: "#F4F3EF", role: "Primary text" },
+	{ token: "--color-text-muted", label: "Inverse Muted", value: "#B5B8B1", role: "Secondary text / meta" },
+	{ token: "--color-accent", label: "Inverse Inquiry Blue", value: "#A6BAFF", role: "Links / interactive / focus" },
+	{ token: "--color-action", label: "Inverse Green", value: "#6BD98D", role: "Primary CTA only" },
+	{ token: "--color-border", label: "Inverse Muted 24%", value: "rgba(181,184,177,0.24)", role: "Hairlines / card borders" },
+	{ token: "--color-border-strong", label: "Inverse Muted 40%", value: "rgba(181,184,177,0.4)", role: "Stronger dividers" },
+];
+
+const typeScale = [
+	{ token: "--text-display", cls: "text-display", font: "IBM Plex Mono", weight: 600, size: "3.5rem / 56px", mobile: "2.25rem / 36px", lh: 1.1, use: "Hero H1", sample: "Build with 99 Ways" },
+	{ token: "--text-h2", cls: "text-h2", font: "IBM Plex Mono", weight: 600, size: "2rem / 32px", mobile: "1.5rem / 24px", lh: 1.2, use: "Section titles", sample: "Section title" },
+	{ token: "--text-h3", cls: "text-h3", font: "IBM Plex Mono", weight: 600, size: "1.25rem / 20px", mobile: "1.125rem / 18px", lh: 1.3, use: "Card / founder names", sample: "Card name" },
+	{ token: "--text-body", cls: "text-body", font: "IBM Plex Sans", weight: 400, size: "1rem / 16px", mobile: "1rem / 16px", lh: 1.6, use: "Paragraphs, bios, excerpts", sample: "The quick brown fox jumps over the lazy dog." },
+	{ token: "--text-label", cls: "text-label", font: "IBM Plex Mono", weight: 500, size: "0.875rem / 14px", mobile: "0.875rem / 14px", lh: 1.4, use: "Nav, buttons, tags, meta", sample: "LABEL / META 0.02EM" },
+	{ token: "--text-small", cls: "text-small", font: "IBM Plex Sans", weight: 400, size: "0.8125rem / 13px", mobile: "0.8125rem / 13px", lh: 1.5, use: "Legal / footer fine print", sample: "© 2026 99 Ways — fine print" },
+];
+
+const spacing = [
+	{ token: "--space-1", px: "4px" },
+	{ token: "--space-2", px: "8px" },
+	{ token: "--space-3", px: "12px" },
+	{ token: "--space-4", px: "16px" },
+	{ token: "--space-6", px: "24px" },
+	{ token: "--space-8", px: "32px" },
+	{ token: "--space-12", px: "48px" },
+	{ token: "--space-16", px: "64px" },
+	{ token: "--space-24", px: "96px" },
+	{ token: "--space-32", px: "128px" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>99ways — Style Guide</title>
+		<meta name="robots" content="noindex" />
+		<Font cssVariable="--font-mono" />
+		<Font cssVariable="--font-sans" />
+	</head>
+	<body class="sg">
+		<main class="sg-shell">
+			<header class="sg-header">
+				<span class="text-label sg-eyebrow">99ways · design system · dark only</span>
+				<h1 class="text-display">Style Guide</h1>
+				<p class="text-body sg-lede">
+					Token/theme layer + baseline components. Verify against <code>DESIGN_SYSTEM.md</code> before building real pages.
+				</p>
+			</header>
+
+			<Divider />
+
+			<section class="sg-section">
+				<h2 class="text-h2">Color palette</h2>
+
+				<div class="sg-swatches">
+					{
+						colors.map((c) => (
+							<div class="sg-swatch">
+								<div class="sg-swatch-chip" style={`background: var(${c.token});`} />
+								<div class="sg-swatch-body">
+									<code class="sg-code">{c.token}</code>
+									<div class="text-label sg-swatch-role">{c.role}</div>
+									<div class="text-small sg-swatch-value">{c.value}</div>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<Divider />
+
+			<section class="sg-section">
+				<h2 class="text-h2">Typography</h2>
+
+				<div class="sg-type">
+					{
+						typeScale.map((t) => (
+							<div class="sg-type-row">
+								<div class="sg-type-meta">
+									<code class="sg-code">{t.token}</code>
+									<div class="text-small sg-type-detail">
+										{t.font} {t.weight} · {t.size} · lh {t.lh}
+										{t.mobile !== t.size ? ` · mobile ${t.mobile}` : ""}
+									</div>
+									<div class="text-small sg-type-use">{t.use}</div>
+								</div>
+								<div class={t.cls}>{t.sample}</div>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<Divider />
+
+			<section class="sg-section">
+				<h2 class="text-h2">Buttons</h2>
+
+				<div class="sg-state">
+					<span class="text-label sg-state-label">Default</span>
+					<div class="sg-row">
+						<Button>Primary CTA</Button>
+						<Button variant="secondary">Secondary</Button>
+					</div>
+				</div>
+
+				<div class="sg-state demo-hover">
+					<span class="text-label sg-state-label">Hover</span>
+					<div class="sg-row">
+						<Button>Primary CTA</Button>
+						<Button variant="secondary">Secondary</Button>
+					</div>
+				</div>
+
+				<div class="sg-state">
+					<span class="text-label sg-state-label">As link</span>
+					<div class="sg-row">
+						<Button href="/">Primary link</Button>
+						<Button href="/" variant="secondary">Secondary link</Button>
+					</div>
+				</div>
+			</section>
+
+			<Divider />
+
+			<section class="sg-section">
+				<h2 class="text-h2">Links</h2>
+
+				<div class="sg-state">
+					<span class="text-label sg-state-label">Default</span>
+					<p class="text-body">
+						An inline <a class="link" href="/">text link</a> within a sentence.
+					</p>
+				</div>
+
+				<div class="sg-state demo-hover">
+					<span class="text-label sg-state-label">Hover / active</span>
+					<p class="text-body">
+						An inline <a class="link" href="/">text link</a> within a sentence.
+					</p>
+				</div>
+			</section>
+
+			<Divider />
+
+			<section class="sg-section">
+				<h2 class="text-h2">Cards</h2>
+
+				<div class="sg-row">
+					<Card>
+						<h3 class="text-h3">Card title</h3>
+						<p class="text-body sg-card-copy">
+							Flat surface, 1px hairline border, no drop shadow. Internal padding is --space-6.
+						</p>
+					</Card>
+					<Card>
+						<h3 class="text-h3">Second card</h3>
+						<p class="text-body sg-card-copy">
+							Separated from neighbours by border, not by background-color shift.
+						</p>
+					</Card>
+				</div>
+			</section>
+
+			<Divider />
+
+			<section class="sg-section">
+				<h2 class="text-h2">Dividers</h2>
+
+				<div class="sg-state">
+					<span class="text-label sg-state-label">Full width</span>
+					<Divider />
+				</div>
+
+				<div class="sg-state">
+					<span class="text-label sg-state-label">Strong (--color-border-strong)</span>
+					<hr class="sg-divider-strong" />
+				</div>
+			</section>
+
+			<Divider />
+
+			<section class="sg-section">
+				<h2 class="text-h2">Spacing</h2>
+
+				<div class="sg-spacing">
+					{
+						spacing.map((s) => (
+							<div class="sg-spacing-row">
+								<code class="sg-code sg-spacing-token">{s.token}</code>
+								<div class="sg-spacing-bar" style={`width: var(${s.token});`} />
+								<span class="text-small sg-spacing-px">{s.px}</span>
+							</div>
+						))
+					}
+				</div>
+			</section>
+
+			<Divider />
+
+			<footer class="sg-footer">
+				<span class="text-small">Temporary preview page — safe to delete before launch.</span>
+			</footer>
+		</main>
+	</body>
+</html>
+
+<style is:global>
+	/* Demo-only: simulate interaction states on a static page */
+	.demo-hover .btn--primary {
+		filter: brightness(0.9);
+	}
+
+	.demo-hover .btn--secondary {
+		border-color: var(--color-accent);
+	}
+
+	.demo-hover a.link {
+		color: var(--color-accent);
+		text-decoration: underline;
+	}
+</style>
+
+<style>
+	.sg-shell {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: var(--space-24) var(--space-16);
+	}
+
+	@media (max-width: 768px) {
+		.sg-shell {
+			padding: var(--space-12) var(--space-6);
+		}
+	}
+
+	.sg-header {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+		margin-bottom: var(--space-8);
+	}
+
+	.sg-eyebrow {
+		color: var(--color-text-muted);
+	}
+
+	.sg-lede {
+		color: var(--color-text-muted);
+		max-width: 60ch;
+	}
+
+	.sg-section {
+		padding: var(--space-8) 0;
+	}
+
+	.sg-section > .text-h2 {
+		margin: 0 0 var(--space-6);
+	}
+
+	.sg-code {
+		font-family: var(--font-mono);
+		font-size: 0.8125rem;
+		color: var(--color-accent);
+	}
+
+	/* Swatches */
+	.sg-swatches {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: var(--space-4);
+	}
+
+	.sg-swatch {
+		display: flex;
+		gap: var(--space-3);
+		padding: var(--space-3);
+		border: 1px solid var(--color-border);
+	}
+
+	.sg-swatch-chip {
+		width: 64px;
+		height: 64px;
+		flex: none;
+		border: 1px solid var(--color-border);
+	}
+
+	.sg-swatch-body {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+		min-width: 0;
+	}
+
+	.sg-swatch-role {
+		color: var(--color-text);
+	}
+
+	.sg-swatch-value {
+		color: var(--color-text-muted);
+	}
+
+	/* Type scale */
+	.sg-type {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.sg-type-row {
+		display: grid;
+		grid-template-columns: 260px 1fr;
+		align-items: baseline;
+		gap: var(--space-6);
+		padding: var(--space-4) 0;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	@media (max-width: 768px) {
+		.sg-type-row {
+			grid-template-columns: 1fr;
+			gap: var(--space-2);
+		}
+	}
+
+	.sg-type-meta {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-1);
+	}
+
+	.sg-type-detail,
+	.sg-type-use {
+		color: var(--color-text-muted);
+	}
+
+	/* Component demos */
+	.sg-state {
+		margin-bottom: var(--space-6);
+	}
+
+	.sg-state-label {
+		display: block;
+		color: var(--color-text-muted);
+		margin-bottom: var(--space-3);
+	}
+
+	.sg-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		gap: var(--space-4);
+	}
+
+	.sg-card-copy {
+		color: var(--color-text-muted);
+		margin: var(--space-2) 0 0;
+	}
+
+	.sg-divider-strong {
+		border: 0;
+		border-top: 1px solid var(--color-border-strong);
+		margin: 0;
+	}
+
+	/* Spacing */
+	.sg-spacing {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+
+	.sg-spacing-row {
+		display: flex;
+		align-items: center;
+		gap: var(--space-4);
+	}
+
+	.sg-spacing-token {
+		width: 120px;
+		flex: none;
+	}
+
+	.sg-spacing-bar {
+		height: 12px;
+		background: var(--color-accent);
+		opacity: 0.7;
+	}
+
+	.sg-spacing-px {
+		color: var(--color-text-muted);
+	}
+
+	.sg-footer {
+		padding-top: var(--space-6);
+		color: var(--color-text-muted);
+	}
+</style>
