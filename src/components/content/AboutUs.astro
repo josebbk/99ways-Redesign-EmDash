@@ -1,0 +1,122 @@
+---
+interface Founder {
+	name: string;
+	role: string;
+	bio: string;
+	photo: string;
+}
+
+const founders: Founder[] = [
+	{
+		name: "Iman Nazari",
+		role: "Co-Founder — Strategy & Experimentation",
+		bio: "Iman connects what most teams keep separate: technology, business, and human behavior. He is the strategic force behind 99Ways' approach to conversion; translating user psychology, product reality, and commercial goals into decisions that actually improve performance. Where others guess at what customers want, Iman looks for signal: how people think, what drives action, and which changes measurably move results. He is relentless about clean measurement, sound inference, and experiments you can trust. For him, better decisions start with better evidence. Every metric must be credible, every insight must survive scrutiny, every test must produce learning; not noise. That is the foundation of 99Ways: reliable data, sharper understanding, and changes proven before they are scaled.",
+		photo: "/founders/iman.jpg",
+	},
+	{
+		name: "Moein Heshmati",
+		role: "Co-Founder — Data Systems & Engineering",
+		bio: "Moein turns complexity into order. He's the architect behind 99Ways' tracking, reporting, and deployment systems; ensuring every insight is built on verified data and reproducible results. Where others chase creative flair, Moein builds structure: repeatable processes, documented workflows, and flawless implementation. He treats precision as a form of respect, for data, for the client, and for the truth. Nothing escapes his attention. Every number must reconcile, every change must be traceable, every system must work exactly as intended. That discipline is what allows 99Ways to move fast without breaking things.",
+		photo: "/founders/moein.webp",
+	},
+];
+---
+
+<section class="about-us">
+	<div class="container">
+		<h2 class="about-us__title text-h2">About Us</h2>
+
+		<div class="about-us__grid">
+			{
+				founders.map((f) => (
+					<div class="about-us__card">
+						<div class="about-us__photo">
+							<img src={f.photo} alt={f.name} loading="lazy" />
+						</div>
+						<h3 class="about-us__name text-h3">{f.name}</h3>
+						<span class="about-us__role text-label">{f.role}</span>
+						<p class="about-us__bio text-body">{f.bio}</p>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.about-us {
+		padding-block: var(--space-24);
+	}
+
+	@media (max-width: 768px) {
+		.about-us {
+			padding-block: var(--space-12);
+		}
+	}
+
+	.about-us__title {
+		margin: 0 0 var(--space-8);
+	}
+
+	.about-us__grid {
+		display: grid;
+		gap: var(--space-8);
+	}
+
+	@media (min-width: 769px) {
+		.about-us__grid {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.about-us__card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+
+	.about-us__photo {
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		overflow: hidden;
+		flex-shrink: 0;
+	}
+
+	.about-us__photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.about-us__name {
+		margin: 0;
+	}
+
+	.about-us__role {
+		color: var(--color-text-muted);
+	}
+
+	.about-us__bio {
+		color: var(--color-text);
+	}
+
+	@media (min-width: 769px) {
+		.about-us__grid {
+			gap: 0 var(--space-16);
+		}
+
+		.about-us__card:not(:last-child) {
+			border-right: 1px solid var(--color-border);
+			padding-right: var(--space-16);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.about-us__card:not(:last-child) {
+			padding-bottom: var(--space-8);
+			border-bottom: 1px solid var(--color-border);
+			margin-bottom: var(--space-8);
+		}
+	}
+</style>

@@ -1,11 +1,37 @@
 ---
 import Base from "../layouts/Base.astro";
 import Hero from "../components/site/Hero.astro";
+import VideoSection from "../components/content/VideoSection.astro";
+import Testimonials from "../components/content/Testimonials.astro";
+import AboutUs from "../components/content/AboutUs.astro";
+import BlogGrid from "../components/content/BlogGrid.astro";
+import { getEmDashCollection } from "emdash";
+
+const { entries, cacheHint } = await getEmDashCollection("posts", {
+  orderBy: { published_at: "desc" },
+  limit: 3,
+});
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const posts = await Promise.all(
+  entries.map(async (entry) => {
+    const terms = entry.data.terms?.category ?? [];
+    const primaryCategory = terms[0]
+      ? { slug: terms[0].slug, name: terms[0].label ?? terms[0].name ?? "" }
+      : undefined;
+    return {
+      id: entry.data.slug ?? entry.id,
+      data: { title: entry.data.title, excerpt: entry.data.excerpt },
+      category: primaryCategory,
+    };
+  })
+);
 ---
 
-<Base
-	title="99Ways"
-	description="We run your CRO operation, from research and prioritization to implementation and analysis."
->
-	<Hero />
+<Base title="99Ways — Home">
+  <Hero />
+  <VideoSection />
+  <Testimonials />
+  <AboutUs />
+  <BlogGrid posts={posts} />
 </Base>

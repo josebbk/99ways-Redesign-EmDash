@@ -1,0 +1,97 @@
+---
+interface Review {
+	id: number;
+	src: string;
+	alt: string;
+}
+
+const reviews: Review[] = [
+	{ id: 1, src: "/testimonials/1.webp", alt: "Client review: Funnel Optimization Assessment and Recommendations" },
+	{ id: 2, src: "/testimonials/2.webp", alt: "Client review: E-commerce analytics, CRO, and A/B testing" },
+	{ id: 3, src: "/testimonials/3.webp", alt: "Client review: Marketing and conversion rate optimization consultation" },
+	{ id: 4, src: "/testimonials/4.webp", alt: "Client review: Conversion Rate Optimization Expert quick job" },
+	{ id: 5, src: "/testimonials/5.webp", alt: "Client review: PostHog and Analytics Expert" },
+	{ id: 6, src: "/testimonials/6.webp", alt: "Client review: Conversion Rate Optimization for Coaching Business" },
+	{ id: 7, src: "/testimonials/7.webp", alt: "Client review: Conversion Rate Optimization and PostHog" },
+	{ id: 8, src: "/testimonials/8.webp", alt: "Client review: Course Marketing Funnel Manager" },
+	{ id: 9, src: "/testimonials/9.webp", alt: "Client review: SaaS Google Analytics and PostHog setup" },
+];
+---
+
+<section class="testimonials">
+	<div class="container">
+		<h2 class="testimonials__title text-h2">How Partners Review Us</h2>
+
+		<div class="testimonials__filmstrip">
+			{
+				reviews.map((r) => (
+					<div class="testimonials__card card">
+						<img src={r.src} alt={r.alt} loading="lazy" />
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.testimonials {
+		padding-block: var(--space-24);
+	}
+
+	@media (max-width: 768px) {
+		.testimonials {
+			padding-block: var(--space-12);
+		}
+	}
+
+	.testimonials__title {
+		margin: 0 0 var(--space-8);
+	}
+
+	.testimonials__filmstrip {
+		display: flex;
+		gap: var(--space-6);
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+		padding-bottom: var(--space-2);
+	}
+
+	.testimonials__filmstrip::-webkit-scrollbar {
+		height: 6px;
+	}
+
+	.testimonials__filmstrip::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.testimonials__filmstrip::-webkit-scrollbar-thumb {
+		background: var(--color-border);
+		border-radius: 3px;
+	}
+
+	.testimonials__filmstrip::-webkit-scrollbar-thumb:hover {
+		background: var(--color-border-strong);
+	}
+
+	.testimonials__card {
+		flex: 0 0 auto;
+		scroll-snap-align: start;
+		padding: var(--space-4);
+	}
+
+	.testimonials__card img {
+		display: block;
+		max-width: 400px;
+		width: 100%;
+		height: auto;
+	}
+
+	@media (max-width: 768px) {
+		.testimonials__card {
+			flex-basis: 300px;
+		}
+	}
+</style>

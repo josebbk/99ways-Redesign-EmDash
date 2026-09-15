@@ -112,7 +112,7 @@ import Logo from "./Logo.astro";
 	const mobileNav = document.getElementById("site-mobile-nav");
 
 	if (toggle && mobileNav) {
-		const setOpen = (open) => {
+		const setOpen = (open: boolean) => {
 			if (open) {
 				mobileNav.removeAttribute("hidden");
 			} else {
@@ -126,7 +126,8 @@ import Logo from "./Logo.astro";
 		});
 
 		mobileNav.addEventListener("click", (event) => {
-			if (event.target.closest("a")) {
+			const target = event.target as HTMLElement | null;
+			if (target?.closest("a")) {
 				setOpen(false);
 			}
 		});

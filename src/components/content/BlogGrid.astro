@@ -1,0 +1,122 @@
+---
+interface PostEntry {
+	id: string;
+	data: {
+		title: string;
+		excerpt?: string;
+	};
+	category?: {
+		slug: string;
+		name: string;
+	};
+}
+
+interface Props {
+	posts: PostEntry[];
+}
+
+const { posts } = Astro.props;
+---
+
+<section class="blog-grid">
+	<div class="container">
+		<h2 class="blog-grid__title text-h2">Latest from 99Ways Academy</h2>
+
+		<div class="blog-grid__grid">
+			{
+				posts.map((post) => (
+					<article class="blog-grid__card card">
+						{post.category && post.category.name && (
+							<span class="blog-grid__tag text-label">{post.category.name}</span>
+						)}
+						<h3 class="blog-grid__title">
+							<a href={`/posts/${post.id}`}>{post.data.title}</a>
+						</h3>
+						{post.data.excerpt && (
+							<p class="blog-grid__excerpt text-body">{post.data.excerpt}</p>
+						)}
+					</article>
+				))
+			}
+		</div>
+
+		<div class="blog-grid__footer">
+			<a class="blog-grid__link text-label" href="/academy/">View all posts</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.blog-grid {
+		padding-block: var(--space-24);
+	}
+
+	@media (max-width: 768px) {
+		.blog-grid {
+			padding-block: var(--space-12);
+		}
+	}
+
+	.blog-grid__title {
+		margin: 0 0 var(--space-8);
+	}
+
+	.blog-grid__grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--space-6);
+	}
+
+	@media (max-width: 768px) {
+		.blog-grid__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.blog-grid__card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2);
+	}
+
+	.blog-grid__tag {
+		color: var(--color-accent);
+	}
+
+	.blog-grid__card h3 {
+		margin: 0;
+	}
+
+	.blog-grid__card a {
+		color: var(--color-text);
+		text-decoration: none;
+	}
+
+	.blog-grid__card a:hover,
+	.blog-grid__card a:active {
+		color: var(--color-accent);
+	}
+
+	.blog-grid__excerpt {
+		color: var(--color-text-muted);
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+		margin: 0;
+	}
+
+	.blog-grid__footer {
+		margin-top: var(--space-8);
+	}
+
+	.blog-grid__link {
+		color: var(--color-accent);
+		text-decoration: none;
+	}
+
+	.blog-grid__link:hover,
+	.blog-grid__link:active {
+		text-decoration: underline;
+	}
+</style>
