@@ -39,6 +39,10 @@ export default defineConfig({
 				directory: "./uploads",
 				baseUrl: "/_emdash/api/media/file",
 			}),
+                        
+			 siteUrl: "https://99ways-emdash-deo.josebbk.com",
+			
+			trustedProxyHeaders: ["x-real-ip"],
 		}),
 	],
 	devToolbar: { enabled: false },
